@@ -6,52 +6,33 @@ public class ReplaceWhiteSpaces {
 
     // This is my solution:
 
-//    public static String replaceAllWhitespaces(char[] source){
-//        StringBuilder stringBuilder = new StringBuilder();
-//        int length = source.length;
-//        int whitespaces = 0;
-//        for(char c: source)
-//            if(c==' ')
-//                whitespaces++;
-//
-//        int right = length-(whitespaces/3)*2;
-//        for(int i=0; i<right; i++){
-//            if(source[i]==' ')
-//                stringBuilder.append("%20");
-//            else
-//                stringBuilder.append(source[i]);
-//        }
-//        return stringBuilder.toString();
-//    }
+    public static String replaceAllWhitespaces(char[] source, int length){
 
-    public static char[] replaceAllWhitespaces(char[] str, int length){
-        int spaceCount = 0;
-        for(int i=0; i<str.length; i++){
-            if(str[i]==' ')
-                spaceCount++;
-        }
-        int newLength = length + spaceCount*2;
+        int whitespaces = 0;
+        for(char c: source)
+            if(c==' ')
+                whitespaces++;
 
-        char[] result = new char[newLength];
-        for(int i=length-1; i>=0; i--){
-            if(str[i]==' '){
-                result[newLength-1]='0';
-                result[newLength-2]='2';
-                result[newLength-3]='%';
-                newLength = newLength-3;
+        int right = length-(whitespaces/3)*2;
+        for(int i=right-1; i>=0; i--){
+            if(source[i]==' ') {
+                source[length - 1] = '0';
+                source[length - 2] = '2';
+                source[length - 3] = '%';
+                length = length - 3;
             }
-            else {
-                result[newLength - 1] = str[i];
-                newLength--;
+            else{
+                source[length - 1] = source[i];
+                length--;
             }
         }
-        return result;
+        return String.valueOf(source);
     }
+    
     public static void main(String agrs[]){
         Scanner sc = new Scanner(System.in);
         String source = sc.nextLine();
         char[] sourceArray = source.toCharArray();
-        char[] resultArray = replaceAllWhitespaces(sourceArray, sourceArray.length);
-            System.out.println(resultArray.toString());
+        System.out.println(replaceAllWhitespaces(sourceArray, sourceArray.length));
     }
 }
