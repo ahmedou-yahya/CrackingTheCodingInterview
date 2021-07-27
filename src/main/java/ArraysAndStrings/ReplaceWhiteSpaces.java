@@ -28,7 +28,7 @@ public class ReplaceWhiteSpaces {
         }
         return String.valueOf(source);
     }
-    
+
     public static void main(String agrs[]){
         Scanner sc = new Scanner(System.in);
         String source = sc.nextLine();
